@@ -1,0 +1,119 @@
+;-------------------------------------------------------------------------------
+; INTEL CONFIDENTIAL
+;
+; Copyright (c) 2021 Intel Corporation All Rights Reserved 
+;
+; The source code contained or described herein and all documents related to 
+; the source code ("Material") are owned by Intel Corporation or its suppliers 
+; or licensors. Title to the Material remains with Intel Corporation or its 
+; suppliers and licensors. The Material contains trade secrets and proprietary 
+; and confidential information of Intel or its suppliers and licensors. The 
+; Material is protected by worldwide copyright and trade secret laws and treaty 
+; provisions. No part of the Material may be used, copied, reproduced, 
+; modified, published, uploaded, posted, transmitted, distributed, or 
+; disclosed in any way without Intel's prior express written permission.
+;
+; No license under any patent, copyright, trade secret or other intellectual 
+; property right is granted to or conferred upon you by disclosure or delivery 
+; of the Materials, either expressly, by implication, inducement, estoppel or 
+; otherwise. Any license under such intellectual property rights must be 
+; expressed and approved by Intel in writing.
+;------------------------------------------------------------------------------
+[Version] 
+Signature = "$WINDOWS NT$" 
+Class = SoftwareComponent
+ClassGuid = {5c4c3332-344d-483c-8739-259e934c9cc8}
+Provider = %INTEL%
+CatalogFile = icst_service.cat
+DriverVer = 10/06/2021,2.0.10301.29
+PnpLockdown=1
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+intel_cst_service_standalone.exe = 1
+intel_cst_support_service.exe = 1
+intel_cst_helper_service.exe = 1
+ServiceSettings.json = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+IcstCopyFiles = 13
+IcstCopySettingsFile = 10,ServiceProfiles\LocalService\AppData\Roaming\Intel(R)\ICST\settings ; comment to skip copying bundled ServiceSettings.json file
+
+[Manufacturer]
+%INTEL% = INTEL,NTAMD64.10.0...17134
+
+[INTEL.NTAMD64.10.0...17134]
+%ICST.DeviceDesc% = IcstInstall,SWC\VID8086_CST_1.0
+
+[IcstInstall]
+CopyFiles = IcstCopyFiles
+CopyFiles = IcstCopySettingsFile ; comment to skip copying bundled ServiceSettings.json file
+
+[IcstCopyFiles]
+intel_cst_service_standalone.exe,,,%COPYFLG_NOSKIP%
+intel_cst_support_service.exe,,,%COPYFLG_NOSKIP%
+intel_cst_helper_service.exe,,,%COPYFLG_NOSKIP%
+
+[IcstCopySettingsFile] ; comment to skip copying bundled ServiceSettings.json file
+; This copy will always overwrite any existing default file, particularly in the case of overinstall/upgrade.
+; The COPYFLG parameter can be updated to match the desired behavior if different from the default.
+ServiceSettings.json,,,%COPYFLG_NOSKIP% ; comment to skip copying bundled ServiceSettings.json file
+
+[IcstCopySettingsFile.security] ; comment to skip copying bundled ServiceSettings.json file
+"D:(A;;GA;;;SY)(A;;GA;;;BA)(A;;GA;;;LS)" ; comment to skip copying bundled ServiceSettings.json file
+
+[IcstInstall.Services]
+AddService = IntelCstService,0x9F8,IcstService
+AddService = IntelCstSupportService,0x9F8,IcstSupportService
+; ICST is not a function driver, use the `null` function driver
+AddService = ,2
+
+[IcstService]
+DisplayName = %IcstSvcDisplayName%
+Description = %IcstSvcDescription%
+ServiceType = %SERVICE_WIN32_OWN_PROCESS%
+StartType = %SERVICE_AUTO_START%
+ErrorControl = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %13%\intel_cst_service_standalone.exe
+AddReg = IcstSvcUserRegistry
+
+[IcstSupportService]
+DisplayName = %IcstSupportSvcDisplayName%
+Description = %IcstSupportSvcDescription%
+ServiceType = %SERVICE_WIN32_OWN_PROCESS%
+StartType = %SERVICE_AUTO_START%
+ErrorControl = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %13%\intel_cst_support_service.exe
+AddReg = IcstSupportSvcUserRegistry
+
+[IcstSvcUserRegistry]
+HKR,,"ObjectName",%REG_SZ%,"NT AUTHORITY\LocalService"
+; The default is NT AUTHORITY\System. However, ICST is a user-mode driver.
+; IPF serves as our kernel-mode driver. So, ICST is set to run as an unprivileged service.
+
+[IcstSupportSvcUserRegistry]
+HKR,,"ObjectName",%REG_SZ%,"NT AUTHORITY\System"
+
+[Strings]
+; ICST-specific strings
+INTEL = "Intel"
+DiskName = "Intel(R) Context Sensing Technology"
+ICST.DeviceDesc  = "Intel(R) Context Sensing Technology Service"
+IcstSvcName = "IntelCstService"
+IcstSvcDisplayName = "Intel(R) Context Sensing Technology Service"
+IcstSvcDescription = "Provides user sensing services using the Intel Platform Framework"
+IcstSupportSvcName = "IntelCstSupportService"
+IcstSupportSvcDisplayName = "Intel(R) Context Sensing Technology Support Service"
+IcstSupportSvcDescription = "Launches user owned process for additional functionality"
+
+; Microsoft-defined constants for flags
+COPYFLG_NOSKIP = 0x00000002
+SERVICE_AUTO_START = 2
+SERVICE_ERROR_NORMAL = 1
+SERVICE_WIN32_OWN_PROCESS = 0x00000010
+REG_SZ = 0x0 ; FLG_ADDREG_TYPE_SZ
+
+

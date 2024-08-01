@@ -1,0 +1,13 @@
+[INFORMATION]
+Projects=Jimny_ADH;Ignis_ADH;Evoque_ADH;Velar_ADH;Volante_ADH;
+OSs=Windows 10 All X64;Windows Next All X64;
+WHQL=Y,
+ProviderFullName=Intel
+SelectedDriverType=Use Inf
+Installer=%RELATIVE_PATH%\Install.cmd
+Parameters=
+InfFiles=%RELATIVE_PATH%\Intel(R)_DTT_9.0.10701.24404\drivers\drivers\x64\dtt_ext.inf;%RELATIVE_PATH%\Intel(R)_DTT_9.0.10701.24404\drivers\drivers\x64\dtt_sw.inf;%RELATIVE_PATH%\Intel(R)_DTT_9.0.10701.24404\ipf\drivers\x64\ipf_acpi.inf;%RELATIVE_PATH%\Intel(R)_DTT_9.0.10701.24404\ipf\drivers\x64\ipf_cpu.inf;
+DriverUtilityInstaller=
+DriverUtilityParameters=
+UWPSourceFolder=
+UWPInstaller=

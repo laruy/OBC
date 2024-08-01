@@ -1,0 +1,61 @@
+body {
+    background-color: rgb(42, 14, 68);
+    color: aliceblue;
+}
+
+input {
+    width: 200px;
+    height: 20px;
+    border-radius: 30px;
+    border: 1px solid rgb(69, 13, 129);
+}
+
+#gameStart {
+    margin-top: 15px;
+    width: 200px;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid rgb(69, 13, 129);
+    background-color: rgb(177, 84, 235);
+    color: aliceblue;
+    cursor: pointer;
+}
+
+#currentPlayer {
+    margin-top: 30px;
+    font-size: xx-large;
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(181, 142, 218);
+    border-radius: 30px;
+}
+
+#player1,
+#player2 {
+    color: aliceblue;
+    text-align: center;
+    height: 40px;
+    margin-top: 190px;
+}
+
+#gameSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10%;
+}
+
+#board {
+    display: flex;
+    margin: 40px;
+}
+
+.spot {
+    border: 3px black solid;
+    padding: 40px 70px 40px 70px;
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0.5;
+    font-size: 80px;
+    border-radius: 5px;
+}

@@ -1,0 +1,106 @@
+;-------------------------------------------------------------------------------
+; INTEL CONFIDENTIAL
+;
+; Copyright (c) 2013-2021 Intel Corporation All Rights Reserved 
+;
+; The source code contained or described herein and all documents related to 
+; the source code ("Material") are owned by Intel Corporation or its suppliers 
+; or licensors. Title to the Material remains with Intel Corporation or its 
+; suppliers and licensors. The Material contains trade secrets and proprietary 
+; and confidential information of Intel or its suppliers and licensors. The 
+; Material is protected by worldwide copyright and trade secret laws and treaty 
+; provisions. No part of the Material may be used, copied, reproduced, 
+; modified, published, uploaded, posted, transmitted, distributed, or 
+; disclosed in any way without Intel's prior express written permission.
+;
+; No license under any patent, copyright, trade secret or other intellectual 
+; property right is granted to or conferred upon you by disclosure or delivery 
+; of the Materials, either expressly, by implication, inducement, estoppel or 
+; otherwise. Any license under such intellectual property rights must be 
+; expressed and approved by Intel in writing.
+;------------------------------------------------------------------------------
+
+[Version] 
+Signature = "$WINDOWS NT$" 
+Class       = Extension
+ClassGuid   = {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+ExtensionId = {F1B5F8E6-3CEE-4811-A45F-D4E5CF96A7E9}
+Provider = %INTEL% 
+CatalogFile = ipfui_ext.cat
+DriverVer = 11/11/2021,1.0.10701.24404
+PnpLockDown=1
+
+;----------------------------------------------------------------------
+; File Information
+;----------------------------------------------------------------------
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+;-------------------------------------------------------------------------------
+; Manufacturer and Models Section
+;-------------------------------------------------------------------------------
+
+[Manufacturer]
+%INTEL% = INTEL,NTamd64.10.0...17763
+
+[INTEL.NTamd64.10.0...17763]
+%PROCADL.DeviceDesc%  = IpfUiExtInstall,PCI\VEN_8086&DEV_461D
+%PROCFHF.DeviceDesc%  = IpfUiExtInstall,PCI\VEN_8086&DEV_3258
+%PROCRPL.DeviceDesc%  = IpfUiExtInstall,PCI\VEN_8086&DEV_A71D
+%PROCMTLMP.DeviceDesc%= IpfUiExtInstall,PCI\VEN_8086&DEV_7D03
+%PROCMTLS.DeviceDesc% = IpfUiExtInstall,PCI\VEN_8086&DEV_AD03
+
+;------------------------------------------------------------------------------
+; Install Sections 
+;------------------------------------------------------------------------------
+
+;------------------------------------------------------------------------------
+; IpfUiExtInstall Install Section (Creates SW Component)
+;------------------------------------------------------------------------------
+[IpfUiExtInstall.NTamd64]
+AddReg = IpfUiExtInstall_AddReg
+
+[IpfUiExtInstall_AddReg]
+HKR,"Dell\MUP\{F1B5F8E6-3CEE-4811-A45F-D4E5CF96A7E9}","Version",,"1.0.10701.24404"
+HKR,"Dell\MUP\{F1B5F8E6-3CEE-4811-A45F-D4E5CF96A7E9}","DisplayName",,"Intel(R) Innovation Platform Framework User Interface Extension"
+
+[IpfUiExtInstall.NTamd64.Components]
+AddComponent = IpfUiExtComponent,,IpfUiExtComponentInstall
+
+[IpfUiExtComponentInstall]
+ComponentIDs = VID8086_IPFUI_1.0
+Description = %IpfUiExtComponentDescription%
+
+;-------------------------------------------------------------------------------
+; Install HW Section
+;-------------------------------------------------------------------------------
+[IpfUiExtInstall.NTamd64.HW]
+AddReg = Hw_AddParams
+
+[Hw_AddParams]
+HKR,"IPF","IpfUiDir",,%13%
+
+;-------------------------------------------------------------------------------
+; Install Services Section
+;-------------------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; Strings and Constants
+;----------------------------------------------------------------------
+
+[Strings]
+INTEL = "Intel"
+DiskName = "Intel(R) Innovation Platform Framework User Interface"
+IpfUiExtComponentDescription="Intel(R) Innovation Platform Framework User Interface Extension Component"
+
+PROCADL.DeviceDesc  = "Intel(R) Innovation Platform Framework User Interface Extension"
+PROCFHF.DeviceDesc  = "Intel(R) Innovation Platform Framework User Interface Extension"
+PROCRPL.DeviceDesc  = "Intel(R) Innovation Platform Framework User Interface Extension"
+PROCMTLMP.DeviceDesc= "Intel(R) Innovation Platform Framework User Interface Extension"
+PROCMTLS.DeviceDesc = "Intel(R) Innovation Platform Framework User Interface Extension"

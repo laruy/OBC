@@ -1,0 +1,179 @@
+;-------------------------------------------------------------------------------
+; INTEL CONFIDENTIAL
+;
+; Copyright (c) 2013-2021 Intel Corporation All Rights Reserved 
+;
+; The source code contained or described herein and all documents related to 
+; the source code ("Material") are owned by Intel Corporation or its suppliers 
+; or licensors. Title to the Material remains with Intel Corporation or its 
+; suppliers and licensors. The Material contains trade secrets and proprietary 
+; and confidential information of Intel or its suppliers and licensors. The 
+; Material is protected by worldwide copyright and trade secret laws and treaty 
+; provisions. No part of the Material may be used, copied, reproduced, 
+; modified, published, uploaded, posted, transmitted, distributed, or 
+; disclosed in any way without Intel's prior express written permission.
+;
+; No license under any patent, copyright, trade secret or other intellectual 
+; property right is granted to or conferred upon you by disclosure or delivery 
+; of the Materials, either expressly, by implication, inducement, estoppel or 
+; otherwise. Any license under such intellectual property rights must be 
+; expressed and approved by Intel in writing.
+;------------------------------------------------------------------------------
+
+[Version] 
+Signature = "$WINDOWS NT$" 
+Class     = SoftwareComponent
+ClassGuid = {5c4c3332-344d-483c-8739-259e934c9cc8}
+Provider = %INTEL% 
+CatalogFile = dttui_sw.cat
+DriverVer = 11/11/2021,9.0.10701.24404
+PnpLockDown=1
+
+;----------------------------------------------------------------------
+; File Information
+;----------------------------------------------------------------------
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+ipfsvc.exe = 1
+dptfui.dll = 1
+index.html = 1, ui
+favicon.ico = 1, ui
+combined.xsl = 1, ui
+CaptureConfig.txt = 1
+dptfui.dvx = 1
+upe_phidget.dll = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+DttUi_CopyFiles = 13
+DttUiContent_CopyFiles = 13, ui
+DttUiDataVault_CopyFiles = 12, DriverData\Intel\IPF\dv
+DttUiDriverData_CopyFiles = 12, DriverData\Intel\IPF\ui
+DttUiSystem32_CopyFiles = 11, Intel\IPF
+
+;-------------------------------------------------------------------------------
+; Manufacturer and Models Section
+;-------------------------------------------------------------------------------
+
+[Manufacturer]
+%INTEL% = INTEL,NTamd64.10.0...17763
+
+[INTEL.NTamd64.10.0...17763]
+%DTTUI_FriendlyName% = DttUiInstall, SWC\VID8086_DTTUI_1.0
+
+;------------------------------------------------------------------------------
+; Install Sections 
+;------------------------------------------------------------------------------
+[DttUiInstall.NTamd64]
+CopyFiles = DttUi_CopyFiles, DttUiContent_CopyFiles, DttUiDataVault_CopyFiles, DttUiDriverData_CopyFiles, DttUiSystem32_CopyFiles
+
+[DttUi_CopyFiles]
+ipfsvc.exe,,,%COPYFLG_NOSKIP%
+dptfui.dll,,,%COPYFLG_NOSKIP%
+
+[DttUiContent_CopyFiles]
+index.html,,,%COPYFLG_NOSKIP%
+favicon.ico,,,%COPYFLG_NOSKIP%
+combined.xsl,,,%COPYFLG_NOSKIP%
+
+[DttUiDataVault_CopyFiles]
+dptfui.dvx,,,%COPYFLG_NOSKIP%
+
+[DttUiDriverData_CopyFiles]
+CaptureConfig.txt,,,%COPYFLG_NOSKIP%
+
+[DttUiSystem32_CopyFiles]
+upe_phidget.dll,,,%COPYFLG_NOSKIP%
+
+;-------------------------------------------------------------------------------
+; Install Services Section
+;-------------------------------------------------------------------------------
+[DttUiInstall.NTamd64.Services]
+AddService=,2,,,,
+AddService=dttui, 0x000009f8, DttUiInstall_InstallService, DttUiSvcLoggingSection, Application, IPFSVC
+
+[DttUiInstall_InstallService]
+DisplayName=%ServiceDisplayName%
+Description=%ServiceDescription%
+ServiceType = %SERVICE_WIN32_OWN_PROCESS%
+StartType = %SERVICE_AUTO_START%
+ErrorControl = %SERVICE_ERROR_NORMAL%
+ServiceBinary = """%13%\ipfsvc.exe"""
+AddReg = Hw_AddParams
+
+[DttUiSvcLoggingSection]
+AddReg=DttUiEtw_AddReg
+AddReg=DttUiEventLog_AddReg
+
+[DttUiEtw_AddReg]
+HKLM,%EtwProviderKey%,,%REG_SZ%,"IpfSvcEtwProvider"
+HKLM,%EtwProviderKey%,"ResourceFileName",%REG_EXPAND_SZ%,"%13%\ipfsvc.exe"
+HKLM,%EtwProviderKey%,"MessageFileName",%REG_EXPAND_SZ%,"%13%\ipfsvc.exe"
+HKLM,%EtwProviderKey%,"Enabled",%REG_DWORD%,1
+
+[DttUiEventLog_AddReg]
+HKLM,%EventLogProviderKey%,,%REG_SZ%,"IPFSVC"
+HKLM,%EventLogProviderKey%,"ResourceFileName",%REG_EXPAND_SZ%,"%13%\ipfsvc.exe"
+HKLM,%EventLogProviderKey%,"MessageFileName",%REG_EXPAND_SZ%,"%13%\ipfsvc.exe"
+HKLM,%EventLogProviderKey%,"Enabled",%REG_DWORD%,1
+HKLM,%EventLogProviderKey%"\ChannelReferences","Count",%REG_DWORD%,1
+HKLM,%EventLogProviderKey%"\ChannelReferences\0\",,%REG_SZ%,"Application"
+HKLM,%EventLogProviderKey%"\ChannelReferences\0\","Flags",%REG_DWORD%,1
+HKLM,%EventLogProviderKey%"\ChannelReferences\0\","Id",%REG_DWORD%,9
+HKLM,%EventLogChannelKey%,"Enabled",%REG_DWORD%,1
+HKLM,%EventLogChannelKey%,"EnableLevel",%REG_DWORD%,0
+HKLM,%EventLogChannelKey%,"EnableProperty",%REG_DWORD%,1
+HKLM,%EventLogChannelKey%,"LoggerName",%REG_SZ%,"EventLog-Application"
+HKLM,%EventLogChannelKey%,"MatchAnyKeyword",%REG_QWORD%,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80
+HKLM,%EventLogChannelKey%,"MatchAllKeyword",%REG_QWORD%,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+
+;-------------------------------------------------------------------------------
+; Install HW Section
+;-------------------------------------------------------------------------------
+ [DttUiInstall.NTamd64.HW]
+AddReg = Hw_AddParams
+
+[Hw_AddParams]
+HKR,"Parameters","Application",,"dptfui.dll"
+HKR,"Parameters","Server",,"pipe://ipfsrv.dptfui"
+HKR,"Parameters","Version",,"9.0.10701.24404"
+HKR,,"ObjectName",,"NT Authority\LocalService"
+HKR,,"FailureActions",%REG_BINARY%,80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,00,00,00,00,01,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+;-------------------------------------------------------------------------------
+; Install WDF Section
+;-------------------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; Strings and Constants
+;----------------------------------------------------------------------
+
+[Strings]
+INTEL = "Intel"
+DiskName = "Intel(R) Dynamic Tuning Technology User Interface"
+
+REG_SZ = 0x00000000
+REG_DWORD = 0x00010001
+REG_MULTI_SZ = 0x00010000
+REG_EXPAND_SZ = 0x00020000
+REG_QWORD = 0x000B0001
+REG_BINARY = 0x00000001
+COPYFLG_NOSKIP = 0x00000002
+
+SERVICE_AUTO_START = 2
+SERVICE_DEMAND_START  = 3
+SERVICE_ERROR_NORMAL  = 1
+SERVICE_KERNEL_DRIVER = 1
+SERVICE_WIN32_OWN_PROCESS = 0x00000010
+
+DTTUI_FriendlyName="Intel(R) Dynamic Tuning Technology User Interface Service"
+ServiceDisplayName="Intel(R) Dynamic Tuning Technology User Interface Service"
+ServiceDescription="Intel(R) Dynamic Tuning Technology User Interface Service"
+
+EtwProviderKey="SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Publishers\{B622598B-F2CD-412A-A37E-0977F9B0240D}"
+EventLogProviderKey="SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Publishers\{A622C6A4-A576-4730-9CA6-BBBB0C2D3B02}"
+EventLogChannelKey="SYSTEM\CurrentControlSet\Control\WMI\Autologger\EventLog-Application\{A622C6A4-A576-4730-9CA6-BBBB0C2D3B02}"
+

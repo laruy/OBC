@@ -1,0 +1,68 @@
+{
+  "lockFeatures": {
+    "WALEnabled": true,
+    "PreDimInterval": 30000,
+    "DimmingInterval": 5000,
+    "NotPresentDimTarget": 0,
+    "LockAfterDimInterval": 60000,
+    "WaitInterval": 5000,
+    "DimScreen": true,
+    "ExternalMonitor": true,
+    "EnableLockWithExternalMonitor": true,
+    "DisplayOffAfterLock": true,
+    "PowerRequest": true,
+    "EnableAudioMode": true
+  },
+  "wakeFeatures": {
+    "WOAEnabled": true,
+    "WakeOnLowBattery": true,
+    "LowBatteryRemainingPercentageLimit": 15,
+    "ExternalMonitor": true,
+    "EnableWakeWithExternalMonitor": true
+  },
+  "appFeatures": {
+    "LaunchOnUserLogIn": false,
+    "AppName": "Intel.ContextSensingSampleApp",
+    "Protocol": "humanpresence",
+    "EnabledEvents": [],
+    "MonitorApp": false,
+    "PrivacyEnabled": true
+  },
+  "noLockOnPresenceFeatures": {
+    "NLoPEnabled": true,
+    "ExternalMonitor": true,
+    "EnableNLoPWithExternalMonitor": true,
+    "WaitInterval": 5000,
+    "EnableOnBattery": true,
+    "LowBatteryRemainingPercentageLimit": 15,
+    "FailSafeTimeout": 1800000
+  },
+  "adaptiveDimmingFeatures": {
+    "ADEnabled": true,
+    "ExternalMonitor": true,
+    "PowerRequest": false,
+    "EnableAudioMode": false,
+    "EnableAdaptiveDimmingWithExternalMonitor": true,
+    "DisengagedDimWaitTime": 5000,
+    "NotPresentDimWaitTime": 5000,
+    "MispredictionFaceDetection": true,
+    "MispredictionTimeWindow": 7000,
+    "Misprediction1DimWaitTime": 30000,
+    "Misprediction2DimWaitTime": 60000,
+    "Misprediction3DimWaitTime": 180000,
+    "Misprediction4DimWaitTime": 300000,
+    "DimmingInterval": 16000,
+    "DimTarget": 20
+  },
+  "onlookerDetectionFeatures": {
+    "OnlookerDetectionEnabled": true,
+    "EnableOnlookerDetectionWithExternalMonitor": true,
+    "DetectionDelayInterval": 3000,
+    "DimWhenOnlookerDetected": true,
+    "DimmingInterval": 5000,
+    "DimTarget": 0,
+    "EnableOnLowBattery": true,
+    "LowBatteryRemainingPercentageLimit": 15,
+    "OnlookerAbsenceWaitInterval": 2000
+  }
+}

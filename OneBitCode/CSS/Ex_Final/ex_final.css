@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header {
+  padding: 30px;
+  width: 100%;
+  min-height: 40px;
+  background-color: #383838;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 15px;
+}
+
+.logo-onebitcode {
+  width: 200px;
+}
+
+.buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: space-around;
+}
+
+.button {
+  font-size: 15px;
+  background-color: transparent;
+  color: white;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: 4s;
+}
+
+.button:hover {
+  border-bottom: 2px solid black;
+}
+
+.title {
+  padding: 20px;
+  /* height: 100px; */
+}
+.title h1 {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.title h3 {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.img-sports {
+  width: 100%;
+  height: 180px;
+  border-radius: 10%;
+}
+
+.item {
+  width: 300px;
+  font-size: 20px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: 4s;
+}
+
+.item:hover {
+  border: 2px solid black;
+}
+
+.aside-content {
+  grid-area: aside-content;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  background-color: rgb(53, 50, 50);
+  gap: 25px;
+}
+
+.aside-content h3 {
+  padding-top: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.extra-content {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.item_extra {
+  color: white;
+}
+
+.extra_sport-name {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.img-sports_extra {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.main-content {
+  grid-area: main-content;
+  justify-content: center;
+  gap: 10px;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "main-content aside-content";
+  flex: 1 0 auto;
+}
+
+.footer {
+  padding: 30px 30px;
+  background-color: #383838;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+@media (max-width: 630px) {
+  .container {
+    grid-template-areas:
+      "main-content"
+      "aside-content";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .aside-content {
+    min-width: 90%;
+  }
+  .footerAnchor {
+    font-size: 19px;
+  }
+}
+@media (max-width: 463px) {
+  .header {
+    justify-content: center;
+  }
+  .main-content {
+    gap: 25px;
+  }
+  .footer {
+    justify-content: space-between;
+  }
+  .footer a {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 300px) {
+  * {
+    font-size: 15px;
+  }
+  .footer {
+    gap: 20px;
+  }
+
+  .main-content {
+    width: 260px;
+  }
+}

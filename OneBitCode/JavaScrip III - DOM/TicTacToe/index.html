@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js" defer></script>
+    <title>Menu</title>
+</head>
+
+<body>
+    <div id="players">
+        <label for="player1">Jogador 1</label>
+        <input type="text" name="player1" id="inputPlayer1">
+
+        <label for="player2">Jogador 2</label>
+        <input type="text" name="player2" id="inputPlayer2">
+
+        <button id="gameStart">Jogar</button>
+    </div>
+
+    <div id="currentPlayer">
+        Tic - Tac - Toe
+    </div>
+
+    <div id="gameSection">
+        <input type="text" id="player1" disabled>
+
+        <div id="board">
+
+            <div class="column1">
+                <div class="spot" id="spot1"></div>
+                <div class="spot" id="spot2"></div>
+                <div class="spot" id="spot3"></div>
+            </div>
+
+            <div class="column2">
+                <div class="spot" id="spot4"></div>
+                <div class="spot" id="spot5"></div>
+                <div class="spot" id="spot6"></div>
+            </div>
+
+            <div class="column3">
+                <div class="spot" id="spot7"></div>
+                <div class="spot" id="spot8"></div>
+                <div class="spot" id="spot9"></div>
+            </div>
+        </div>
+
+        <input type="text" id="player2" disabled>
+    </div>
+
+</body>
+
+</html>

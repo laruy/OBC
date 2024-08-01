@@ -1,0 +1,4 @@
+Intel(R)_DTT_9.0.10701.24404\drivers\drivers\x64\dtt_ext.inf
+Intel(R)_DTT_9.0.10701.24404\drivers\drivers\x64\dtt_sw.inf
+Intel(R)_DTT_9.0.10701.24404\ipf\drivers\x64\ipf_acpi.inf
+Intel(R)_DTT_9.0.10701.24404\ipf\drivers\x64\ipf_cpu.inf

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time de Jogadores</title>
+    <script src="./timeJogadores.js"></script>
+</head>
+<body>
+    <h1>Time de Jogadores</h1>
+    <br>
+    <h2>Escalar Jogador</h2>
+    <ul>
+        <li>Posição: </li>
+        <input type="text" name="position" id="position">
+        <br>
+        <li>Nome: </li>
+        <input type="text" name="name" id="name">
+        <br>
+        <li>Número camiseta</li>
+        <input type="number" name="shirt" id="shirt">
+    </ul>
+    <button onclick="confirmPlayer()">Escalar</button>
+    <br>
+    <h2>Remover Jogador</h2>
+    <label for="removedPlayer">Número da camisa do jogador: </label>
+    <input type="number" name="removedPlayer" id="removedPlayer">
+    <button onclick="removePlayer()">Remover</button>
+    <br>
+    <ul id="teamList"></ul>
+</body>
+</html>

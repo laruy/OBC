@@ -1,0 +1,106 @@
+;-------------------------------------------------------------------------------
+; INTEL CONFIDENTIAL
+;
+; Copyright (c) 2013-2021 Intel Corporation All Rights Reserved 
+;
+; The source code contained or described herein and all documents related to 
+; the source code ("Material") are owned by Intel Corporation or its suppliers 
+; or licensors. Title to the Material remains with Intel Corporation or its 
+; suppliers and licensors. The Material contains trade secrets and proprietary 
+; and confidential information of Intel or its suppliers and licensors. The 
+; Material is protected by worldwide copyright and trade secret laws and treaty 
+; provisions. No part of the Material may be used, copied, reproduced, 
+; modified, published, uploaded, posted, transmitted, distributed, or 
+; disclosed in any way without Intel's prior express written permission.
+;
+; No license under any patent, copyright, trade secret or other intellectual 
+; property right is granted to or conferred upon you by disclosure or delivery 
+; of the Materials, either expressly, by implication, inducement, estoppel or 
+; otherwise. Any license under such intellectual property rights must be 
+; expressed and approved by Intel in writing.
+;------------------------------------------------------------------------------
+
+[Version] 
+Signature = "$WINDOWS NT$" 
+Class       = Extension
+ClassGuid   = {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+ExtensionId = {38B5F18E-A0A5-45EB-8B95-EB800872D528}
+Provider = %INTEL% 
+CatalogFile = dttui_ext.cat
+DriverVer = 11/11/2021,9.0.10701.24404
+PnpLockDown=1
+
+;----------------------------------------------------------------------
+; File Information
+;----------------------------------------------------------------------
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+;-------------------------------------------------------------------------------
+; Manufacturer and Models Section
+;-------------------------------------------------------------------------------
+
+[Manufacturer]
+%INTEL% = INTEL,NTamd64.10.0...17763
+
+[INTEL.NTamd64.10.0...17763]
+%PROCADL.DeviceDesc%  = DttUiExtInstall,PCI\VEN_8086&DEV_461D
+%PROCFHF.DeviceDesc%  = DttUiExtInstall,PCI\VEN_8086&DEV_3258
+%PROCRPL.DeviceDesc%  = DttUiExtInstall,PCI\VEN_8086&DEV_A71D
+%PROCMTLMP.DeviceDesc%= DttUiExtInstall,PCI\VEN_8086&DEV_7D03
+%PROCMTLS.DeviceDesc% = DttUiExtInstall,PCI\VEN_8086&DEV_AD03
+
+;------------------------------------------------------------------------------
+; Install Sections 
+;------------------------------------------------------------------------------
+
+;------------------------------------------------------------------------------
+; DttUiExtInstall Install Section (Creates SW Component)
+;------------------------------------------------------------------------------
+[DttUiExtInstall.NTamd64]
+AddReg = DttUiExtInstall_AddReg
+
+[DttUiExtInstall_AddReg]
+HKR,"Dell\MUP\{38B5F18E-A0A5-45EB-8B95-EB800872D528}","Version",,"9.0.10701.24404"
+HKR,"Dell\MUP\{38B5F18E-A0A5-45EB-8B95-EB800872D528}","DisplayName",,"Intel(R) Dynamic Tuning Technology User Interface Extension"
+
+[DttUiExtInstall.NTamd64.Components]
+AddComponent = DttUiExtComponent,,DttUiExtComponentInstall
+
+[DttUiExtComponentInstall]
+ComponentIDs = VID8086_DTTUI_1.0
+Description = %DttUiExtComponentDescription%
+
+;-------------------------------------------------------------------------------
+; Install HW Section
+;-------------------------------------------------------------------------------
+[DttUiExtInstall.NTamd64.HW]
+AddReg = Hw_AddParams
+
+[Hw_AddParams]
+HKR,"IPF","DttUiDir",,%13%
+
+;-------------------------------------------------------------------------------
+; Install Services Section
+;-------------------------------------------------------------------------------
+
+;----------------------------------------------------------------------
+; Strings and Constants
+;----------------------------------------------------------------------
+
+[Strings]
+INTEL = "Intel"
+DiskName = "Intel(R) Dynamic Tuning Technology User Interface"
+DttUiExtComponentDescription="Intel(R) Dynamic Tuning Technology User Interface Extension Component"
+
+PROCADL.DeviceDesc  = "Intel(R) Dynamic Tuning Technology User Interface Extension"
+PROCFHF.DeviceDesc  = "Intel(R) Dynamic Tuning Technology User Interface Extension"
+PROCRPL.DeviceDesc  = "Intel(R) Dynamic Tuning Technology User Interface Extension"
+PROCMTLMP.DeviceDesc= "Intel(R) Dynamic Tuning Technology User Interface Extension"
+PROCMTLS.DeviceDesc = "Intel(R) Dynamic Tuning Technology User Interface Extension"
